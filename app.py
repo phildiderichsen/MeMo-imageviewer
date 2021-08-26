@@ -12,7 +12,7 @@ def read_table(url):
         return [row for row in csv.DictReader(f.readlines())]
 
 
-APPNAME = "PrettyGalaxies"
+APPNAME = "Faksimiler"
 STATIC_FOLDER = 'example'
 TABLE_FILE = "example/fakecatalog.csv"
 
@@ -42,6 +42,18 @@ def image_view(ind=None):
             index=ind,
             pager=pager,
             data=table[ind])
+
+
+@app.route('/<filename>/')
+def page_view(filename=None):
+    if filename != '1874_Albertius_BjergmandensRing_2':
+        return render_template("404.html"), 404
+    else:
+        pager.current = 0
+        return render_template(
+            'pageview.html',
+            index=0,
+            pager=pager)
 
 
 @app.route('/goto', methods=['POST', 'GET'])    
