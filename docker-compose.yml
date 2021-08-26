@@ -1,0 +1,12 @@
+version: '3'
+services:
+  imgview:
+    build:
+      context: ./
+    # fixes race condition https://vsupalov.com/simple-fix-db-not-ready/
+    # restart: on-failure
+    #volumes:
+    #  - ./page_images:/opt/page_images
+    ports:
+      # Flask server
+      - "5000:5000"
